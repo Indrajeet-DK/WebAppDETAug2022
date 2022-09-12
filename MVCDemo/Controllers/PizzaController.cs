@@ -36,6 +36,27 @@ namespace MVCDemo.Controllers
             return RedirectToAction("List");
         }
 
+
+        public IActionResult Delete()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
+            Pizza p = PizzaService.Get(id);
+            if (p != null)
+                return View(p);
+            else
+                return RedirectToAction("List");
+        }
+        [HttpDelete]
+        public IActionResult Delete(Pizza p)
+        {
+            PizzaService.Delete(p.Id);
+            return RedirectToAction("List");
+        }
     }
 }
 
